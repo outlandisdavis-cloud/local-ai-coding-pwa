@@ -1,0 +1,13 @@
+export type AgentMode = 'agent' | 'ask' | 'plan';
+export type ViewMode = 'split' | 'code' | 'preview';
+export type ToolCall = { id: string; type: 'function'; function: { name: string; arguments: string } };
+export type Project = { id: string; name: string; description: string; createdAt: string; updatedAt: string };
+export type ProjectFile = { id: string; projectId: string; path: string; content: string; language: string; updatedAt: string };
+export type Settings = { provider: string; endpoint: string; model: string; temperature: number; maxTokens: number; contextSize: number; systemPrompt: string; autoApprove: boolean; hasApiKey: boolean };
+export type Conversation = { id: string; projectId: string; title: string; mode: string; createdAt: string };
+export type Message = { id: string; role: string; content: string; toolCalls?: ToolCall[] | null; toolCallId?: string | null; createdAt?: string };
+export type RunResult = { id?: string; filename: string; language: string; command?: string | null; stdout: string; stderr: string; exitCode: number | null; duration: number; createdAt?: string };
+export type RuntimeStatus = { connected: boolean; models: string[]; error?: string; platform: string; node: string; python: boolean };
+export type WorkspaceData = { projects: Project[]; project: Project; files: ProjectFile[]; settings: Settings; conversations: Conversation[]; runs: RunResult[] };
+export type StreamEvent = { type: string; content?: string; message?: string; conversationId?: string; call?: ToolCall; result?: string; status?: string; filesChanged?: boolean };
+export type ModalName = 'settings' | 'models' | 'shortcuts' | 'install' | 'new-project' | 'new-file' | 'rename-file' | 'rename-project' | 'delete-file' | 'delete-project' | null;
